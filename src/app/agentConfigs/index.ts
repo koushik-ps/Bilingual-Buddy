@@ -1,12 +1,16 @@
 import { AllAgentConfigsType } from "@/app/types";
-import frontDeskAuthentication from "./frontDeskAuthentication";
-import customerServiceRetail from "./customerServiceRetail";
-import simpleExample from "./simpleExample";
+import hindiEnglish from "./hindiEnglish";
+import kannadaEnglish from "./kannadaEnglish";
+import malayalamEnglish from "./malayalamEnglish";
+import tamilEnglish from "./tamilEnglish";
+import teluguEnglish from "./teluguEnglish";
 
 export const allAgentSets: AllAgentConfigsType = {
-  frontDeskAuthentication,
-  customerServiceRetail,
-  simpleExample,
+  hindiEnglish,
+  kannadaEnglish,
+  malayalamEnglish,
+  tamilEnglish,
+  teluguEnglish,
 };
 
-export const defaultAgentSetKey = "simpleExample";
+export const defaultAgentSetKey = "tamilEnglish";
