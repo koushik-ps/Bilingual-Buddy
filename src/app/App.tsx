@@ -27,6 +27,13 @@ import { allAgentSets, defaultAgentSetKey } from "@/app/agentConfigs";
 
 import useAudioDownload from "./hooks/useAudioDownload";
 
+// Scenario display names
+const scenarioDisplayNames: { [key: string]: string } = {
+  "languageTeacher": "Language Teacher",
+  "curriculumTeacher": "Curriculum Teacher", 
+  "businessAdviser": "Super RSO"
+};
+
 function App() {
   const searchParams = useSearchParams();
 
@@ -432,44 +439,48 @@ function App() {
     };
   }, [sessionStatus]);
 
-  const agentSetKey = searchParams.get("agentConfig") || "default";
+  const agentSetKey = searchParams.get("agentConfig") || defaultAgentSetKey;
 
   return (
     <div className="text-base flex flex-col h-screen bg-gray-100 text-gray-800 relative">
-      <div className="p-5 text-lg font-semibold flex justify-between items-center">
-        <div
-          className="flex items-center cursor-pointer"
-          onClick={() => window.location.reload()}
-        >
-          <div>
-            <Image
-              src="/openai-logomark.svg"
-              alt="OpenAI Logo"
-              width={20}
-              height={20}
-              className="mr-2"
-            />
-          </div>
-          <div>
-            Realtime API <span className="text-gray-500">Agents</span>
-          </div>
-        </div>
-        <div className="flex items-center">
-          <label className="flex items-center text-base gap-1 mr-2 font-medium">
-            Scenario
-          </label>
+     <div className="p-5 text-lg font-semibold flex justify-between items-center relative">
+  <div
+    className="flex items-center cursor-pointer"
+    onClick={() => window.location.reload()}
+  >
+    <div>
+      <Image
+        src="/Logo_of_Titan_Company,_May_2018.svg.png"
+        alt="OpenAI Logo"
+        width={70}
+        height={70}
+        className="mr-2"
+      />
+    </div>
+  </div>
+  
+  <div className="absolute left-1/2 transform -translate-x-1/2 font-semibold">
+    <span>Bilingual Buddy</span>
+  </div>
+  
+  <div className="flex items-center">
+    <label className="flex items-center text-base gap-1 mr-2 font-medium">
+      BOT :
+    </label>
           <div className="relative inline-block">
-            <select
-              value={agentSetKey}
-              onChange={handleAgentChange}
-              className="appearance-none border border-gray-300 rounded-lg text-base px-2 py-1 pr-8 cursor-pointer font-normal focus:outline-none"
-            >
-              {Object.keys(allAgentSets).map((agentKey) => (
-                <option key={agentKey} value={agentKey}>
-                  {agentKey}
-                </option>
-              ))}
-            </select>
+
+          <select
+            value={agentSetKey}
+            onChange={handleAgentChange}
+            className="appearance-none border border-gray-300 rounded-lg text-base px-2 py-1 pr-8 cursor-pointer font-normal focus:outline-none"
+          >
+            {Object.keys(allAgentSets).map((agentKey) => (
+              <option key={agentKey} value={agentKey}>
+                {scenarioDisplayNames[agentKey] || agentKey}
+              </option>
+            ))}
+          </select>
+           
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-600">
               <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path
@@ -484,7 +495,7 @@ function App() {
           {agentSetKey && (
             <div className="flex items-center ml-6">
               <label className="flex items-center text-base gap-1 mr-2 font-medium">
-                Agent
+                Language
               </label>
               <div className="relative inline-block">
                 <select

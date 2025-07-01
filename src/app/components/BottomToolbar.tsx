@@ -83,19 +83,37 @@ function BottomToolbar({
         >
           Push to talk
         </label>
+        {/* Replace Talk button with microphone icon */}
         <button
           onMouseDown={handleTalkButtonDown}
           onMouseUp={handleTalkButtonUp}
           onTouchStart={handleTalkButtonDown}
           onTouchEnd={handleTalkButtonUp}
           disabled={!isPTTActive}
-          className={
-            (isPTTUserSpeaking ? "bg-gray-300" : "bg-gray-200") +
-            " py-1 px-4 cursor-pointer rounded-md" +
-            (!isPTTActive ? " bg-gray-100 text-gray-400" : "")
-          }
+          className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors duration-200 ${
+            !isPTTActive 
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed" 
+              : isPTTUserSpeaking 
+                ? "bg-green-500 text-white" 
+                : "bg-blue-500 text-white"
+          }`}
         >
-          Talk
+          {/* Microphone SVG icon */}
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="20" 
+            height="20" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+          >
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" x2="12" y1="19" y2="22"></line>
+          </svg>
         </button>
       </div>
 
